@@ -1,6 +1,7 @@
 <script>
 import AppHeader from './components/AppHeader.vue';
 import AppFooter from './components/AppFooter.vue';
+import DashboardPage from './Pages/DashboardPage.vue';
 
 export default{
   data(){
@@ -9,7 +10,8 @@ export default{
   },
   components:{
     AppHeader,
-    AppFooter
+    AppFooter,
+    DashboardPage
   
   }
 
@@ -19,7 +21,11 @@ export default{
 
 <template>
   <AppHeader/>
+  <main class="container my-4">
+    <DashboardPage/>
+  </main>
   <AppFooter/>
+  
   
 </template>
 
