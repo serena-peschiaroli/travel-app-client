@@ -2,7 +2,7 @@ import { createRouter, createWebHistory} from "vue-router";
 import DashboardPage from "./Pages/DashboardPage.vue";
 import TripsPage from "./Pages/TripsPage.vue";
 import CreateTripPage from "./Pages/CreateTripPage.vue";
-import TripsListPage from "./Pages/TripsListPage.vue";
+
 
 
 const router = createRouter({

@@ -41,7 +41,7 @@ export default {
         const response = await axios.post(`${store.baseUrl}/api/trips`, tripData);
         if (response.status === 201 || response.status === 200) {
           console.log("Trip created successfully", response.data);
-          this.$emit("tripCreated", response.data.data.id); // Emit trip ID to parent
+          this.$emit("tripCreated", response.data.data.id); 
         }
       } catch (error) {
         console.error("Error creating trip:", error);

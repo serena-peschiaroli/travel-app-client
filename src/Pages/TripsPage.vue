@@ -167,7 +167,7 @@ export default {
 
 
 <style>
-/* Add any custom styles here */
+
 .stop-card {
   margin-bottom: 20px;
 }

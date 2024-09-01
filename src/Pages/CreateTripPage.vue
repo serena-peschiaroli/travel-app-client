@@ -15,6 +15,7 @@ export default {
     return {
       tripId: null, 
       stops: [], 
+      stopId: null,
     };
   },
   methods: {
@@ -23,6 +24,8 @@ export default {
     },
     handleStopsUpdated(stops) {
       this.stops = stops; 
+      console.log(stops);
+      
     },
   },
 };
@@ -38,7 +41,7 @@ export default {
     <AppStopComponent v-if="tripId" :tripId="tripId" />
 
     <!-- Expense Component -->
-    <AppExpenseComponent v-if="tripId" :tripId="tripId" :stops="stops" />
+    <AppExpenseComponent v-if="tripId" :tripId="tripId" :stops="stops" @stopsUpdated="handleStopsUpdated" />
   </div>
 </template>
 

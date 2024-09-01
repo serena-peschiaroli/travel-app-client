@@ -5,21 +5,37 @@ import axios from "axios";
 import { store } from "../store";
 
 export default {
-  props: ['tripId', 'stops'],
+  props: {
+    tripId: Number,
+    stops: Array,
+    stopId: Number,
+  },
   data() {
     return {
       newExpense: {
         amount: "",
         description: "",
         category: "",
-        stopId: null,
+        
       },
       expenses: [],
       expenseCategories: ["FLIGHTS", "HOTELS", "MEALS", "TRANSPORT", "MISCELLANEOUS"],
+      localStops: [],
     };
   },
+  mounted() {
+    if (this.tripId) {
+      this.fetchStopsForTrip(); 
+    }
+  },
   methods: {
+    async fetchStopsForTrip(){
+      const response = await axios.get(`${store.baseUrl}/api/trips/${this.tripId}/stops`);
+      this.localStops = response.data.data; 
+      console.log("Fetched Stops:", this.localStops);
+    },
     async addExpense() {
+      
       if (!this.tripId) {
         alert("Please create the trip first.");
         return;
@@ -61,7 +77,8 @@ export default {
     <form @submit.prevent="addExpense">
       <div class="row mb-2">
         <div class="col-md-3">
-          <input type="number" v-model="newExpense.amount" placeholder="Amount" class="form-control" min="0.01" step="0.01" required>
+          <input type="number" v-model="newExpense.amount" placeholder="Amount" class="form-control" min="0.01"
+            step="0.01" required>
         </div>
         <div class="col-md-3">
           <input type="text" v-model="newExpense.description" placeholder="Description" class="form-control">
@@ -74,7 +91,7 @@ export default {
         <div class="col-md-3">
           <select v-model="newExpense.stopId" class="form-select">
             <option value="" selected>Select Stop (Optional)</option>
-            <option v-for="stop in stops" :key="stop.id" :value="stop.id">{{ stop.title }}</option>
+            <option v-for="stop in localStops" :key="stop.id" :value="stop.id">{{ stop.title }}</option>
           </select>
         </div>
         <div class="col-md-12 mt-2">
@@ -87,8 +104,8 @@ export default {
       <h4>Added Expenses</h4>
       <ul class="list-group">
         <li class="list-group-item" v-for="(expense, index) in expenses" :key="index">
-          {{ expense.category }} - {{ expense.amount }} - {{ expense.description }} 
-          <span v-if="expense.stopId"> (Stop: {{ stops.find(stop => stop.id === expense.stopId)?.title }})</span>
+          {{ expense.category }} - {{ expense.amount }} - {{ expense.description }}
+          <span v-if="expense.stopId"> (Stop: {{ localStops.find(stop => stop.id === expense.stopId)?.title }})</span>
         </li>
       </ul>
     </div>

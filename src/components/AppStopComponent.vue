@@ -65,10 +65,13 @@ export default {
         if (response.status === 201 || response.status === 200) {
           console.log("Stop added successfully", response.data);
           const createdStop = response.data.data;
+          const createdStopId = response.data.data.id;
+          console.log("Created stop id : ", createdStopId);
           this.stops.push(createdStop);
           this.$emit("stopCreated", createdStop); 
-          this.resetNewStop();
           this.$emit("stopsUpdated", this.stops)
+          this.resetNewStop();
+          
         }
       } catch (error) {
         console.error("Error adding stop:", error);
