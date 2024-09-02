@@ -50,7 +50,7 @@ export default {
         })
         .catch((error) => {
           console.error("Error fetching trip details:", error);
-          alert("An error occurred while fetching trip details. Please try again."); // Basic user feedback
+          alert("An error occurred while fetching trip details. Please try again."); 
         });
     },
     formatDate(date) {

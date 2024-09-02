@@ -38,10 +38,10 @@ export default {
     <AppTripComponent @tripCreated="handleTripCreated" />
 
     <!-- Stop Component -->
-    <AppStopComponent v-if="tripId" :tripId="tripId" />
+    <AppStopComponent v-if="tripId" :tripId="tripId" @stopsUpdated="handleStopsUpdated" />
 
     <!-- Expense Component -->
-    <AppExpenseComponent v-if="tripId" :tripId="tripId" :stops="stops" @stopsUpdated="handleStopsUpdated" />
+    <AppExpenseComponent v-if="tripId" :tripId="tripId" :stops="stops" />
   </div>
 </template>
 

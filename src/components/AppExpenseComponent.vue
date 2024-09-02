@@ -31,6 +31,7 @@ export default {
   methods: {
     async fetchStopsForTrip(){
       const response = await axios.get(`${store.baseUrl}/api/trips/${this.tripId}/stops`);
+      console.log(response);
       this.localStops = response.data.data; 
       console.log("Fetched Stops:", this.localStops);
     },
